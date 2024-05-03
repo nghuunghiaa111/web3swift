@@ -44,11 +44,23 @@ public class Web3HttpProvider: Web3Provider {
         attachedKeystoreManager = manager
     }
 
+    public init(url: URL, network: Networks, keystoreManager: KeystoreManager? = nil) {
+        self.url = url
+        self.network = network
+        self.attachedKeystoreManager = keystoreManager
+    }
+
     public init(url: URL, network: Networks, token: String, di: String, keystoreManager: KeystoreManager? = nil) {
         self.url = url
         self.network = network
         self.attachedKeystoreManager = keystoreManager
         let config = URLSessionConfiguration.default
+        var headers = configuration.httpAdditionalHeaders ?? [:]
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        headers["Authorization"] = "Bearer \(token)"
+        headers["di"] = di
+        config.httpAdditionalHeaders = headers
         let urlSession = URLSession(configuration: config)
         self.session = urlSession
     }
