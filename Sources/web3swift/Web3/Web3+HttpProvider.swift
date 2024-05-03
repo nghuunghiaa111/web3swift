@@ -44,9 +44,12 @@ public class Web3HttpProvider: Web3Provider {
         attachedKeystoreManager = manager
     }
 
-    public init(url: URL, network: Networks, keystoreManager: KeystoreManager? = nil) {
+    public init(url: URL, network: Networks, token: String, di: String, keystoreManager: KeystoreManager? = nil) {
         self.url = url
         self.network = network
         self.attachedKeystoreManager = keystoreManager
+        let config = URLSessionConfiguration.default
+        let urlSession = URLSession(configuration: config)
+        self.session = urlSession
     }
 }
