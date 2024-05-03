@@ -55,7 +55,7 @@ public class Web3HttpProvider: Web3Provider {
         self.network = network
         self.attachedKeystoreManager = keystoreManager
         let config = URLSessionConfiguration.default
-        var headers = configuration.httpAdditionalHeaders ?? [:]
+        var headers = config.httpAdditionalHeaders ?? [:]
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         headers["Authorization"] = "Bearer \(token)"
